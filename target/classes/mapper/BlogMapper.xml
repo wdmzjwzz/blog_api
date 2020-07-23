@@ -4,4 +4,7 @@
     <select id="findAll" resultType="Blog">
         SELECT * FROM blog_list
     </select>
+    <insert id="createBlog" parameterType="Blog">
+        insert into blog_list(id,title,content,create_time,user_name)values (#{id},#{title},#{content},#{create_time},#{user_name})
+    </insert>
 </mapper>

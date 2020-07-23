@@ -6,7 +6,10 @@ import com.wzz.service.BlogListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("BlogListService")
 public class BlogServiceimpl implements BlogListService {
@@ -15,5 +18,10 @@ public class BlogServiceimpl implements BlogListService {
     @Override
     public List<Blog> findAll() {
         return blogMapper.findAll();
+    }
+
+    @Override
+    public void createBlog(Map params) {
+        blogMapper.createBlog(params);
     }
 }

@@ -24,6 +24,8 @@ public class ResponseResult implements Serializable {
      */
     private Object data;
 
+    
+
     public static ResponseResult ok(Object data){
         return new ResponseResult(200,"success",data);
     }
@@ -31,7 +33,7 @@ public class ResponseResult implements Serializable {
 
 
     public static ResponseResult fail(String mes){
-        return new ResponseResult(500,mes,null);
+        return new ResponseResult(200,mes,null);
     }
 
 }

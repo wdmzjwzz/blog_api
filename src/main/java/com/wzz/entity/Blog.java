@@ -8,8 +8,9 @@ import java.io.Serializable;
 public class Blog implements Serializable {
     private Long id;//编号
     private String title;//
+    private String dir_id;//
     private String content;//
-    private String create_time;
+    private Long create_time;
     private String user_name;
 
 }

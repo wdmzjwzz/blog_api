@@ -22,18 +22,18 @@ public class ResponseResult implements Serializable {
     /**
      * 数据
      */
-    private Object data;
+    private Object result;
 
     
 
-    public static ResponseResult ok(Object data){
-        return new ResponseResult(200,"success",data);
+    public static ResponseResult ok(Object result){
+        return new ResponseResult(0,"success",result);
     }
 
 
 
     public static ResponseResult fail(String mes){
-        return new ResponseResult(200,mes,null);
+        return new ResponseResult(1,mes,null);
     }
 
 }

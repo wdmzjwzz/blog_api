@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wzz.mapper.BlogDirMapper">
-    <select id="findAllDir" resultType="BlogDir" parameterType="String">
-        SELECT * FROM dir_list
-    <where>
-        <if test="id != null">
-            category=#{category}
-        </if>
-    </where>
-        ORDER BY id DESC;
+    <select id="findAllDir" resultType="BlogDir">
+        SELECT * FROM dir_list ORDER BY id DESC;
     </select>
 
     <insert id="createBlogDir" parameterType="BlogDir">

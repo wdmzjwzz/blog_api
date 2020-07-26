@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Mapper//指定这是一个操作数据库的mapper
 public interface BlogMapper {
-    List<Blog> findAll(String category);
+    List<Blog> findAll(Map params);
 
     void createBlog(Map params);
     int deleteBlogById(Long id);

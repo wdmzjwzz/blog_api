@@ -32,11 +32,17 @@ public class BlogListController {
     private BlogListService blogListService;
 
     @ResponseBody
-    @RequestMapping(value = "/getBlogList", method = RequestMethod.GET)
+    @GetMapping("/getBlogList")
     @ApiOperation(value = "获取blogList", notes = "")
 
-    public ResponseResult findAll(String category) {
-        return ResponseResult.ok(blogListService.findAll(category));
+    public ResponseResult findAll(@RequestParam(required = false) String category,@RequestParam(required = false,defaultValue = "10") Integer ps,@RequestParam(required = false,defaultValue = "0") Integer pageNo) {
+
+        Map<String, Object> paramsObject = new HashMap<String, Object>();
+        paramsObject.put("category", category);
+        paramsObject.put("start", pageNo*ps);
+        paramsObject.put("end",(pageNo+1)*ps);
+        System.out.print(paramsObject);
+        return ResponseResult.ok(blogListService.findAll(paramsObject));
     }
 
 

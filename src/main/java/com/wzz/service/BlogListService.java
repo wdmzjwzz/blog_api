@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface  BlogListService {
-    List<Blog> findAll(String category);
+    List<Blog> findAll(Map params);
 
     void createBlog(Map params);
     int deleteBlogById(Long id);

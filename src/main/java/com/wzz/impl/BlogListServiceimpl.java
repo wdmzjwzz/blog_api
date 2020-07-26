@@ -14,8 +14,8 @@ public class BlogListServiceimpl implements BlogListService {
     @Autowired
     private BlogMapper blogMapper;
     @Override
-    public List<Blog> findAll(String category) {
-        return blogMapper.findAll(category);
+    public List<Blog> findAll(Map params) {
+        return blogMapper.findAll(params);
     }
 
 

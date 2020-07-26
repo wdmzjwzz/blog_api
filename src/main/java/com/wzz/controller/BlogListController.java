@@ -4,10 +4,7 @@ import com.wzz.entity.Blog;
 import com.wzz.service.BlogListService;
 import com.wzz.utils.ResponseResult;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +36,6 @@ public class BlogListController {
     @ApiOperation(value = "获取blogList", notes = "")
 
     public ResponseResult findAll(String category) {
-        System.out.print(category+"555555");
         return ResponseResult.ok(blogListService.findAll(category));
     }
 

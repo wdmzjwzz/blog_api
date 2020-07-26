@@ -1,8 +1,6 @@
 package com.wzz.controller;
 
-import com.wzz.entity.Blog;
-import com.wzz.service.BlogDirListService;
-import com.wzz.service.BlogListService;
+import com.wzz.service.CategoryService;
 import com.wzz.utils.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -20,7 +17,7 @@ import java.util.Map;
 @RestController
 //@ControllerAdvice
 @Api(value = "blogDirList")
-public class BlogDirController {
+public class CategoryController {
 
     @ExceptionHandler(Exception.class) //表示让Spring捕获到所有抛出的SignException异常，并交由这个被注解的方法处理。
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -30,14 +27,14 @@ public class BlogDirController {
     }
 
     @Autowired
-    private BlogDirListService blogDirListService;
+    private CategoryService categoryService;
 
     @ResponseBody
     @GetMapping("/list")
     @ApiOperation(value = "获取blogDirList", notes = "")
 
     public ResponseResult findAllDir() {
-        return ResponseResult.ok(blogDirListService.findAllDir());
+        return ResponseResult.ok(categoryService.findAllDir());
     }
 
 
@@ -56,7 +53,7 @@ public class BlogDirController {
             return ResponseResult.fail("name不能为空");
         }
         try {
-            blogDirListService.createBlogDir(params);
+            categoryService.createBlogDir(params);
         } catch (Exception e) {
             return ResponseResult.fail(e.toString());
         }
@@ -74,7 +71,7 @@ public class BlogDirController {
             return ResponseResult.fail("id is null");
         }
         try {
-            int delete_number = blogDirListService.deleteBlogDirById(Long.parseLong(id));
+            int delete_number = categoryService.deleteBlogDirById(Long.parseLong(id));
             if (delete_number > 0) {
                 return ResponseResult.ok("删除成功！");
             } else {
@@ -105,7 +102,7 @@ public class BlogDirController {
         paramsObject.put("id", Long.parseLong(id));
         paramsObject.put("name", params.get("name").toString().trim());
         try {
-            int update_number = blogDirListService.updateBlogDirById(paramsObject);
+            int update_number = categoryService.updateBlogDirById(paramsObject);
             if (update_number > 0) {
                 return ResponseResult.ok("修改成功！");
             } else {

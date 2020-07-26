@@ -1,7 +1,6 @@
 package com.wzz.impl;
 
 import com.wzz.entity.Blog;
-import com.wzz.entity.BlogDir;
 import com.wzz.mapper.BlogMapper;
 import com.wzz.service.BlogListService;
 import org.springframework.beans.factory.annotation.Autowired;

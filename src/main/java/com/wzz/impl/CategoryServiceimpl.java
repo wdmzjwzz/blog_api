@@ -1,18 +1,18 @@
 package com.wzz.impl;
 
 import com.wzz.entity.BlogDir;
-import com.wzz.mapper.BlogDirMapper;
-import com.wzz.service.BlogDirListService;
+import com.wzz.mapper.CategoryMapper;
+import com.wzz.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
-@Service("BlogDirListService")
-public class BlogDirListServiceimpl implements BlogDirListService {
+@Service("CategoryService")
+public class CategoryServiceimpl implements CategoryService {
     @Autowired
-    private BlogDirMapper blogDirMapper;
+    private CategoryMapper blogDirMapper;
     @Override
     public List<BlogDir> findAllDir() {
         return blogDirMapper.findAllDir();

@@ -59,7 +59,6 @@ public class BlogListController {
         if (params.get("title") == null || params.get("content") == null||"".equals(params.get("name").toString().trim())) {
             return ResponseResult.fail("缺少必要参数");
         }
-        ;
         try {
             blogListService.createBlog(params);
         } catch (Exception e) {

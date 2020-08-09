@@ -78,8 +78,9 @@ public class CategoryController {
         }
         Map<String, Object> paramsObject = new HashMap<String, Object>();
         paramsObject.put("category", id);
+        paramsObject.put("start", 0);
+        paramsObject.put("end",10);
         List<Blog> list =  blogListService.findAll(paramsObject);
-        System.out.print(list);
         if (list.size()>0){
             return ResponseResult.fail("该分类不为空！不能删除！");
         }

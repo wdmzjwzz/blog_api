@@ -9,7 +9,7 @@ public interface CategoryService {
     List<BlogDir> findAllDir();
 
     void createBlogDir(Map params);
-    int deleteBlogDirById(Long id);
+    int deleteBlogDirById(String id);
 
     int updateBlogDirById(Map params);
 }

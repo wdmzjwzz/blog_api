@@ -24,7 +24,7 @@ public class CategoryServiceimpl implements CategoryService {
     }
 
     @Override
-    public int deleteBlogDirById(Long id) {
+    public int deleteBlogDirById(String id) {
         return blogDirMapper.deleteBlogDirById(id);
     }
 

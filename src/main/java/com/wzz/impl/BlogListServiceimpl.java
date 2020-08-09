@@ -25,7 +25,7 @@ public class BlogListServiceimpl implements BlogListService {
     }
 
     @Override
-    public int deleteBlogById(Long id) {
+    public int deleteBlogById(String id) {
         return blogMapper.deleteBlogById(id);
     }
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wzz.mapper.BlogMapper">
     <select id="findAll" resultType="Blog" >
-        SELECT * FROM blog_list WHERE 1=1
+        SELECT id,title,user_name,overview,create_time FROM blog_list WHERE is_deleted=1
         <if test="category != null">
            AND  category = #{category}
         </if>
@@ -11,20 +11,20 @@
 
     </select>
     <select id="getBlogById" resultType="Blog">
-        SELECT * FROM blog_list WHERE id=#{id};
+        SELECT id,title, overview,create_time,content,user_name FROM blog_list WHERE  is_deleted=1 and id=#{id};
     </select>
     <insert id="createBlog" parameterType="Blog">
-        insert into blog_list(id,title,content,create_time,user_name)values (#{id},#{title},#{content},#{create_time},#{user_name})
+        insert into blog_list(id,title,content,create_time,user_name,category,overview)values (#{id},#{title},#{content},#{create_time},#{user_name},#{category},#{overview})
     </insert>
 
-    <delete id="deleteBlogById" parameterType="Long">
-        delete from blog_list where
-        id=#{id}
-    </delete>
+    <update id="deleteBlogById" parameterType="String">
+        update blog_list  SET is_deleted=0 where id=#{id}
+    </update>
     <update id="updateBlogById" parameterType="Blog">
         update blog_list
         <set>
             <if test="content != null">content=#{content},</if>
+            <if test="overview != null">overview=#{overview},</if>
             <if test="title != null">title=#{title},</if>
         </set>
         where id=#{id}

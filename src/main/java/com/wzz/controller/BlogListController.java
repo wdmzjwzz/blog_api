@@ -41,7 +41,6 @@ public class BlogListController {
         paramsObject.put("category", category);
         paramsObject.put("start", pageNo*ps);
         paramsObject.put("end",(pageNo+1)*ps);
-        System.out.print(paramsObject);
         return ResponseResult.ok(blogListService.findAll(paramsObject));
     }
 
@@ -52,11 +51,10 @@ public class BlogListController {
 
 
     public ResponseResult createBlog(@RequestBody Map params) {
-        params.put("id", new Date().getTime());
+        params.put("id", "BLOG-" + new Date().getTime());
         params.put("create_time", new Date().getTime());
         params.put("user_name", "wangzz");
-
-        if (params.get("title") == null || params.get("content") == null||"".equals(params.get("name").toString().trim())) {
+        if (params.get("title") == null || params.get("content") == null||"".equals(params.get("title").toString().trim())) {
             return ResponseResult.fail("缺少必要参数");
         }
         try {
@@ -78,7 +76,7 @@ public class BlogListController {
             return ResponseResult.fail("id is null");
         }
         try {
-            int delete_number = blogListService.deleteBlogById(Long.parseLong(id));
+            int delete_number = blogListService.deleteBlogById(id);
             if (delete_number > 0) {
                 return ResponseResult.ok("删除成功！");
             } else {
@@ -110,7 +108,7 @@ public class BlogListController {
         }
         ;
         Map<String, Object> paramsObject = new HashMap<String, Object>();
-        paramsObject.put("id", Long.parseLong(id));
+        paramsObject.put("id", id);
         paramsObject.put("title", params.get("title").toString().trim());
         paramsObject.put("content", params.get("content"));
         try {

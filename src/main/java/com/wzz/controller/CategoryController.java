@@ -1,5 +1,7 @@
 package com.wzz.controller;
 
+import com.wzz.entity.Blog;
+import com.wzz.service.BlogListService;
 import com.wzz.service.CategoryService;
 import com.wzz.utils.ResponseResult;
 import io.swagger.annotations.Api;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -29,6 +32,9 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private BlogListService blogListService;
+
     @ResponseBody
     @GetMapping("/list")
     @ApiOperation(value = "获取blogDirList", notes = "")
@@ -44,11 +50,9 @@ public class CategoryController {
 
 
     public ResponseResult createBlogDir(@RequestBody Map params) {
-        params.put("id", new Date().getTime());
+        params.put("id", "Lab-" + new Date().getTime());
         params.put("name", params.get("name"));
-        if (params.get("dir_id") == null||"".equals(params.get("dir_id").toString().trim())) {
-            return ResponseResult.fail("dir_id不能为空");
-        }
+
         if (params.get("name") == null||"".equals(params.get("name").toString().trim())) {
             return ResponseResult.fail("name不能为空");
         }
@@ -67,11 +71,20 @@ public class CategoryController {
 
     @DeleteMapping("/deleteBlogDirById/{id}")
     public ResponseResult deleteBlogDirById(@PathVariable("id") String id) {
+
+
         if (id == null) {
             return ResponseResult.fail("id is null");
         }
+        Map<String, Object> paramsObject = new HashMap<String, Object>();
+        paramsObject.put("category", id);
+        List<Blog> list =  blogListService.findAll(paramsObject);
+        System.out.print(list);
+        if (list.size()>0){
+            return ResponseResult.fail("该分类不为空！不能删除！");
+        }
         try {
-            int delete_number = categoryService.deleteBlogDirById(Long.parseLong(id));
+            int delete_number = categoryService.deleteBlogDirById(id);
             if (delete_number > 0) {
                 return ResponseResult.ok("删除成功！");
             } else {
@@ -99,7 +112,7 @@ public class CategoryController {
         }
 
         Map<String, Object> paramsObject = new HashMap<String, Object>();
-        paramsObject.put("id", Long.parseLong(id));
+        paramsObject.put("id", id);
         paramsObject.put("name", params.get("name").toString().trim());
         try {
             int update_number = categoryService.updateBlogDirById(paramsObject);

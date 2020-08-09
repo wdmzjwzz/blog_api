@@ -9,7 +9,7 @@ public interface  BlogListService {
     List<Blog> findAll(Map params);
 
     void createBlog(Map params);
-    int deleteBlogById(Long id);
+    int deleteBlogById(String id);
 
     int updateBlogById(Map params);
 

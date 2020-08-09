@@ -2,17 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wzz.mapper.CategoryMapper">
     <select id="findAllDir" resultType="BlogDir">
-        SELECT * FROM dir_list ORDER BY id DESC;
+        SELECT name,id FROM dir_list where is_deleted=1 ORDER BY id DESC;
     </select>
 
     <insert id="createBlogDir" parameterType="BlogDir">
         insert into dir_list(id,name)values (#{id},#{name})
     </insert>
 
-    <delete id="deleteBlogDirById" parameterType="Long">
-        delete from dir_list where
-        id=#{id}
-    </delete>
+    <update id="deleteBlogDirById" parameterType="String">
+        update dir_list  SET  is_deleted=0 where id=#{id}
+    </update>
     <update id="updateBlogDirById" parameterType="BlogDir">
         update dir_list
         <set>

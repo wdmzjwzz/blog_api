@@ -9,9 +9,9 @@
         insert into dir_list(id,name)values (#{id},#{name})
     </insert>
 
-    <update id="deleteBlogDirById" parameterType="String">
-        update dir_list  SET  is_deleted=0 where id=#{id}
-    </update>
+    <delete id="deleteBlogDirById" parameterType="String">
+        DELETE FROM dir_list WHERE  id=#{id}
+    </delete>
     <update id="updateBlogDirById" parameterType="BlogDir">
         update dir_list
         <set>
